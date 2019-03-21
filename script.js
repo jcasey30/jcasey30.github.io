@@ -1,4 +1,4 @@
-var cache = {}
+https:var cache = {}
 var tableDict = [];
 function openNav() {
   document.getElementById("mySidenav").style.width = "700px";
@@ -109,7 +109,7 @@ $(() => {
     let globalDate2     = dateParsed2.concat(timeParsed)
     let finalDate       = new Date(date_month_new)
     let finalDate2      = new Date(date_month_new2)
-    let address2        = 'http://energywatch.fac.gatech.edu:3000/api/rollcall'
+    let address2        = 'https://energywatch.fac.gatech.edu:3000/api/rollcall'
     // let ID_source              = $('#combo :selected').text();
     let ID_source       = ID_source2
 
@@ -845,7 +845,7 @@ $(() => {
                   if (weekorday == 'Weekly'){
                     num = 800
                   }
-                  let address ='http://energywatch.fac.gatech.edu:3000/api/rollcall'+'?bldg='+building+'&num='+String(num)+'&time='+String(datestring);
+                  let address ='https://energywatch.fac.gatech.edu:3000/api/rollcall'+'?bldg='+building+'&num='+String(num)+'&time='+String(datestring);
                   console.log(address);
                   if(cache[address]){
                     return callback(cache[address])
@@ -1320,7 +1320,7 @@ $(() => {
                 console.log(date_list);
 
                 let date_str_all = date_list.join('')
-                let address = `http://energywatch.fac.gatech.edu:3000/api/rollcall?time=${ date_str_all }${ all_building_str }`
+                let address = `https://energywatch.fac.gatech.edu:3000/api/rollcall?time=${ date_str_all }${ all_building_str }`
 
                 m('Ajax request --> ', address)
                 $.get(address, (data, status) => {
