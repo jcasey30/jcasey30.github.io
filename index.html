@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>GT Utilities Tracker</title>
+  <meta content='charset=utf-8'>
+  <link rel='stylesheet' href='./style.css' />
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+  </head>
+</head>
+
+<nav class="navbar navbar-nav navbar-dark ">
+  <form class="form-inline">
+    <a href = "http://energywatch.fac.gatech.edu:3000/webtools"class="btn text-white" role="button">Home</a>
+    <a href ="http://energywatch.fac.gatech.edu:3000/webtools/billtracker" class="btn text-white" role="button">GT Utilities Tracker</a>
+    <a href ="http://energywatch.fac.gatech.edu:3000/webtools/utilitesrollcallmech" class="btn text-white" role="button">GT Utilities Rollcall Mechanical</a>
+    <a href ="http://energywatch.fac.gatech.edu:3000/webtools/utilitesrollcallall" class="btn text-white" role="button">GT Utilities Rollcall All</a>
+  </form>
+</nav>
+
+
+    <body>
+      <!-- First Choose CSV file downloaded from ION database to parse and filter
+      <div id="inputs" class="clearfix">
+      <input type="file" id="files" name="files[]" multiple="">
+    </div> -->
+
+    <form>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <!-- <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a> -->
+        <span class="hiddendiv">
+          <button id='btn4' type='button' display = 'none' class='btn btn-warning float-center'>Correct Resets</button>
+          <div class="ibchart" id="container" style="height: 550px width: 600px" ></div>
+        </span>
+      </div>
+
+      <!-- <span onclick="openNav()">open</span> -->
+
+
+       <div class="float-left">
+      <div class="dropdown">
+      <!-- <input type="TextBox" ID="datebox" Class="form-control"></input> -->
+  <button id = "dropdownbut"class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Source Type
+  <!-- <span class="caret"></span> -->
+</button>
+  <ul id = 'dropdownsel' class="dropdown-menu">
+    <li><a href="#">Condensate</a></li>
+    <li><a href="#">Cooling Total</a></li>
+    <li><a href="#">COOLING FLOW</a></li>
+    <li><a href="#">Supply Temp</a></li>
+    <li><a href="#">Return Temp</a></li>
+  </ul>
+</div>
+</div>
+
+
+
+      <div class='date-time'>
+
+        <label for='date'>Select Starting Date (1st of a Month)</label>
+        <input type='month' id='date' name='date'>
+
+        <!-- <label for='time'>Time</label>
+        <input type='time' id='time' name='time'> -->
+
+        <label for='date'>Select Ending Date (1st of a Month)</label>
+        <input type='month' id='date2' name='date2'>
+
+        <!-- <label for='time'>Time</label>
+        <input type='time' id='time' name='time'> -->
+
+        <!-- <div class='form-group'>
+        <label for='exampleFormControlInput3'>Number of Data Points to Check</label>
+        <input type='sourceid' class='form-control' id='exampleFormControlInput3' placeholder='Number of Data Points'>
+      </div> -->
+
+
+      <button id='btn3' type='button' class='btn btn-warning'>Gather Data</button>
+      <input type="button" class ='btn btn-warning' value="Clear Data" onClick="document.location.reload(true)">
+      <div id = "datacheck">
+      </div>
+      <!-- <input type="button" class ='btn btn-warning' value="Clear Data" onClick="document.location.reload(true)"> -->
+    </div>
+
+    <!-- <button onclick="myFunction()">Click Me</button>
+    <div id="clickme">
+      Click here
+    </div> -->
+
+  </form>
+  <p class = 'testp'>
+    This generates a spreadsheet chart that gives the values of of a specified source
+    for all buildings on a monthly basis. Clicking a cell in the table allows for
+    a chart to be generated to further examine the data. If a cell is orange colored,
+    that means there was a recorded decrease over that month (i.e. If a cell for April
+    is orange, then that means the value decreased from March to April). The value on the first
+    of each month is shown in the cell. Clicking 'All' will
+    allow for graphing over entire timespan.
+    The "reset filter" button allows for a correction of data (cumulative) when there are erronous resets in the data gathering process.
+    <br>
+    <br>Legend: <br>
+
+    <ul>
+      <li><mark2>This color indicates an abnormality from previous month </mark2> </li>
+      <li><mark1>This color indicates abnormality occurs during this month (click to show on graph) </mark1> </li>
+      <li><mark3>This color indicates Null values </mark3> </li>
+      <li><mark4>This color indicates Nonphyiscal values</mark4> </li>
+      <li><mark5>This color in the Account box indicates that the filtering was not completed correctly. This can occur when the filter is applied to errors beyond its scope or the data has too many gaps </mark5> </li>
+    </ul>
+    Click on table cells to chart selected data
+  </p>
+<!-- <div id = 'fitlerbut' > -->
+  <!-- <button id='btn4' type='button' display = 'none' class='btn btn-warning float-left'>Correct Resets</button> -->
+  <button class='btn btn-warning float-left' onclick="openNav()">Show Graph</button>
+<!-- </div> -->
+  <!-- Click on table cells to chart selected data -->
+  <!-- <input type="button" value="Chart Data!" id="go" /> -->
+
+  <hr>
+  <!-- Click on chart button to chart selected data
+  <input type="button" value="Chart Data!" id="go" /> -->
+  <!-- <body style="height: 100pxwidth: 2000px margin: 0"> -->
+  <!-- <span class="hiddendiv">
+
+
+    <div class="ibchart" id="container" style="height: 550px width: 600px" ></div>
+  </span> -->
+
+
+  <div class = 'contain'>
+    <!-- <div>
+    <span id="chart_div">
+  </div> -->
+  <!-- <output id="list">
+</output> -->
+<table >
+  <div class="ibtable" id='div1'>
+  </div>
+</table>
+
+<div class="ibchart" id="container" style="height: 550px width: 600px" ></div>
+</div>
+
+<div id = 'div3'>
+<table class="ibtable">
+<!--Delta table  -->
+<div class="contain">
+
+
+<table class="ibtable">
+<div id = 'div2'>
+  </div>
+</table>
+</div>
+
+<!-- </body> -->
+<div id = 'div3'>
+<table class="table2">
+
+</table>
+</div>
+
+
+<hr>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/async/2.6.1/async.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js'></script>
+<script src='http://evanplaice.github.io/jquery-csv/src/jquery.csv.js'></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src='./script.js'></script>
+</body></html>
